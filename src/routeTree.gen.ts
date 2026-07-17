@@ -9,38 +9,141 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppTongQuanRouteImport } from './routes/_app.tong-quan'
+import { Route as AppSanPhamRouteImport } from './routes/_app.san-pham'
+import { Route as AppKhachHangRouteImport } from './routes/_app.khach-hang'
+import { Route as AppGhiChuRouteImport } from './routes/_app.ghi-chu'
+import { Route as AppCongNoRouteImport } from './routes/_app.cong-no'
+import { Route as AppCoHoiRouteImport } from './routes/_app.co-hoi'
+import { Route as AppBaoGiaRouteImport } from './routes/_app.bao-gia'
 
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppTongQuanRoute = AppTongQuanRouteImport.update({
+  id: '/tong-quan',
+  path: '/tong-quan',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSanPhamRoute = AppSanPhamRouteImport.update({
+  id: '/san-pham',
+  path: '/san-pham',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppKhachHangRoute = AppKhachHangRouteImport.update({
+  id: '/khach-hang',
+  path: '/khach-hang',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGhiChuRoute = AppGhiChuRouteImport.update({
+  id: '/ghi-chu',
+  path: '/ghi-chu',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCongNoRoute = AppCongNoRouteImport.update({
+  id: '/cong-no',
+  path: '/cong-no',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCoHoiRoute = AppCoHoiRouteImport.update({
+  id: '/co-hoi',
+  path: '/co-hoi',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBaoGiaRoute = AppBaoGiaRouteImport.update({
+  id: '/bao-gia',
+  path: '/bao-gia',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bao-gia': typeof AppBaoGiaRoute
+  '/co-hoi': typeof AppCoHoiRoute
+  '/cong-no': typeof AppCongNoRoute
+  '/ghi-chu': typeof AppGhiChuRoute
+  '/khach-hang': typeof AppKhachHangRoute
+  '/san-pham': typeof AppSanPhamRoute
+  '/tong-quan': typeof AppTongQuanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bao-gia': typeof AppBaoGiaRoute
+  '/co-hoi': typeof AppCoHoiRoute
+  '/cong-no': typeof AppCongNoRoute
+  '/ghi-chu': typeof AppGhiChuRoute
+  '/khach-hang': typeof AppKhachHangRoute
+  '/san-pham': typeof AppSanPhamRoute
+  '/tong-quan': typeof AppTongQuanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/bao-gia': typeof AppBaoGiaRoute
+  '/_app/co-hoi': typeof AppCoHoiRoute
+  '/_app/cong-no': typeof AppCongNoRoute
+  '/_app/ghi-chu': typeof AppGhiChuRoute
+  '/_app/khach-hang': typeof AppKhachHangRoute
+  '/_app/san-pham': typeof AppSanPhamRoute
+  '/_app/tong-quan': typeof AppTongQuanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bao-gia'
+    | '/co-hoi'
+    | '/cong-no'
+    | '/ghi-chu'
+    | '/khach-hang'
+    | '/san-pham'
+    | '/tong-quan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/bao-gia'
+    | '/co-hoi'
+    | '/cong-no'
+    | '/ghi-chu'
+    | '/khach-hang'
+    | '/san-pham'
+    | '/tong-quan'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/bao-gia'
+    | '/_app/co-hoi'
+    | '/_app/cong-no'
+    | '/_app/ghi-chu'
+    | '/_app/khach-hang'
+    | '/_app/san-pham'
+    | '/_app/tong-quan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +151,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/tong-quan': {
+      id: '/_app/tong-quan'
+      path: '/tong-quan'
+      fullPath: '/tong-quan'
+      preLoaderRoute: typeof AppTongQuanRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/san-pham': {
+      id: '/_app/san-pham'
+      path: '/san-pham'
+      fullPath: '/san-pham'
+      preLoaderRoute: typeof AppSanPhamRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/khach-hang': {
+      id: '/_app/khach-hang'
+      path: '/khach-hang'
+      fullPath: '/khach-hang'
+      preLoaderRoute: typeof AppKhachHangRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ghi-chu': {
+      id: '/_app/ghi-chu'
+      path: '/ghi-chu'
+      fullPath: '/ghi-chu'
+      preLoaderRoute: typeof AppGhiChuRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/cong-no': {
+      id: '/_app/cong-no'
+      path: '/cong-no'
+      fullPath: '/cong-no'
+      preLoaderRoute: typeof AppCongNoRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/co-hoi': {
+      id: '/_app/co-hoi'
+      path: '/co-hoi'
+      fullPath: '/co-hoi'
+      preLoaderRoute: typeof AppCoHoiRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/bao-gia': {
+      id: '/_app/bao-gia'
+      path: '/bao-gia'
+      fullPath: '/bao-gia'
+      preLoaderRoute: typeof AppBaoGiaRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppBaoGiaRoute: typeof AppBaoGiaRoute
+  AppCoHoiRoute: typeof AppCoHoiRoute
+  AppCongNoRoute: typeof AppCongNoRoute
+  AppGhiChuRoute: typeof AppGhiChuRoute
+  AppKhachHangRoute: typeof AppKhachHangRoute
+  AppSanPhamRoute: typeof AppSanPhamRoute
+  AppTongQuanRoute: typeof AppTongQuanRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppBaoGiaRoute: AppBaoGiaRoute,
+  AppCoHoiRoute: AppCoHoiRoute,
+  AppCongNoRoute: AppCongNoRoute,
+  AppGhiChuRoute: AppGhiChuRoute,
+  AppKhachHangRoute: AppKhachHangRoute,
+  AppSanPhamRoute: AppSanPhamRoute,
+  AppTongQuanRoute: AppTongQuanRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
