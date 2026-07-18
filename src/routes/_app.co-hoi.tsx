@@ -9,7 +9,7 @@ export const Route = createFileRoute("/_app/co-hoi")({
   head: () => ({
     meta: [{ title: "Cơ hội — Innomat CRM" }],
   }),
-  loader: async () => {
+  loader: async (): Promise<{ customers: Customer[] }> => {
     const customers = await fetchCustomers({ data: { status: "all" } });
     return { customers };
   },
@@ -56,7 +56,7 @@ function DealCard({
 }
 
 function PipelinePage() {
-  const { customers } = Route.useLoaderData();
+  const { customers } = Route.useLoaderData() as { customers: Customer[] };
   const [editCustomer, setEditCustomer] = useState<Customer | null>(null);
 
   return (

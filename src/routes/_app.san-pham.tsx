@@ -1,9 +1,13 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import * as React from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { ProductImage } from "@/components/ProductImage";
 import { EditProductDialog } from "@/components/EditProductDialog";
 import { EditProductImagesDialog } from "@/components/EditProductImagesDialog";
+import { FilterChip } from "@/components/product-filter/FilterChip";
+import { PriceFilter } from "@/components/product-filter/PriceFilter";
+import { MultiSelectFilter } from "@/components/product-filter/MultiSelectFilter";
 import { fetchProducts } from "@/api/functions";
 import type { Product } from "@/lib/types";
 import { formatVND } from "@/lib/format";
@@ -15,18 +19,14 @@ import {
 import {
   ChevronLeft,
   ChevronRight,
+  Flame,
   Images,
   Pencil,
   Search,
+  X,
 } from "lucide-react";
 
 const PAGE_SIZE = 24;
-
-function parseMoneyInput(raw: string): number | null {
-  const digits = raw.replace(/[^\d]/g, "");
-  if (!digits) return null;
-  return Number(digits);
-}
 
 function formatMoneyShort(n: number): string {
   if (n >= 1_000_000)
@@ -35,11 +35,42 @@ function formatMoneyShort(n: number): string {
   return String(n);
 }
 
-type SanPhamSearch = { nhom?: string };
+function parseCsv(v: unknown): string[] {
+  if (typeof v !== "string" || !v.trim()) return [];
+  return v
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+type SanPhamSearch = {
+  nhom?: string;
+  q?: string;
+  min?: number;
+  max?: number;
+  colors?: string[];
+  sizes?: string[];
+  hot?: boolean;
+  page?: number;
+};
 
 export const Route = createFileRoute("/_app/san-pham")({
   validateSearch: (search: Record<string, unknown>): SanPhamSearch => ({
     nhom: typeof search.nhom === "string" ? search.nhom : undefined,
+    q: typeof search.q === "string" ? search.q : undefined,
+    min: typeof search.min === "number" ? search.min : undefined,
+    max: typeof search.max === "number" ? search.max : undefined,
+    colors: Array.isArray(search.colors)
+      ? (search.colors as string[])
+      : parseCsv(search.colors),
+    sizes: Array.isArray(search.sizes)
+      ? (search.sizes as string[])
+      : parseCsv(search.sizes),
+    hot: search.hot === true || search.hot === "1",
+    page:
+      typeof search.page === "number" && search.page > 0
+        ? Math.floor(search.page)
+        : undefined,
   }),
   beforeLoad: ({ search }) => {
     if (!search.nhom) {
@@ -71,88 +102,126 @@ export const Route = createFileRoute("/_app/san-pham")({
 });
 
 function ProductsPage() {
-  const { products } = Route.useLoaderData();
-  const { nhom } = Route.useSearch();
+  const { products } = Route.useLoaderData() as { products: Product[] };
+  const searchParams = Route.useSearch();
+  const navigate = Route.useNavigate();
+
+  const {
+    nhom,
+    q: qParam = "",
+    min: minParam = 0,
+    max: maxParam = 0,
+    colors: colorsParam = [],
+    sizes: sizesParam = [],
+    hot: hotParam = false,
+    page: pageParam = 1,
+  } = searchParams;
+
   const category = categoryFromSlug(nhom);
   const groupLabel =
     category === "all" ? "Sản phẩm" : labelFromCategory(category);
 
-  const [priceMin, setPriceMin] = useState("");
-  const [priceMax, setPriceMax] = useState("");
-  const [color, setColor] = useState<string>("all");
-  const [hotOnly, setHotOnly] = useState(false);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  // Input search dùng local state + debounce vào URL để đỡ giật
+  const [searchDraft, setSearchDraft] = useState(qParam);
+  useEffect(() => setSearchDraft(qParam), [qParam]);
+
+  useEffect(() => {
+    if (searchDraft === (qParam ?? "")) return;
+    const t = setTimeout(() => {
+      navigate({
+        search: (prev: SanPhamSearch) => ({
+          ...prev,
+          q: searchDraft.trim() ? searchDraft : undefined,
+          page: undefined,
+        }),
+        replace: true,
+      });
+    }, 220);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchDraft]);
+
+  const deferredSearch = useDeferredValue(searchDraft);
+
   const [editProduct, setEditProduct] = useState<Product | null>(null);
   const [imagesProduct, setImagesProduct] = useState<Product | null>(null);
 
-  /** Scope theo nhóm sidebar */
+  /** Scope theo nhóm sidebar (chỉ đổi khi nhóm đổi) */
   const scoped = useMemo(() => {
     if (category === "all") return products;
     return products.filter((p) => p.category === category);
   }, [products, category]);
 
+  /** Chỉ số tìm kiếm normalize sẵn — filter nhanh hơn nhiều */
+  const indexed = useMemo(
+    () =>
+      scoped.map((p) => ({
+        p,
+        haystack: [
+          p.code,
+          p.internal_code || "",
+          p.name,
+          p.size,
+          p.color || "",
+          p.collection || "",
+          p.material,
+        ]
+          .join(" ")
+          .toLowerCase(),
+      })),
+    [scoped],
+  );
+
   const colorOptions = useMemo(() => {
     const map = new Map<string, number>();
-    for (const p of scoped) {
+    for (const { p } of indexed) {
       const c = (p.color || "").trim();
       if (!c) continue;
       map.set(c, (map.get(c) ?? 0) + 1);
     }
-    return Array.from(map.entries()).sort((a, b) =>
-      a[0].localeCompare(b[0], "vi"),
-    );
-  }, [scoped]);
+    return Array.from(map.entries())
+      .sort((a, b) => a[0].localeCompare(b[0], "vi"))
+      .map(([value, count]) => ({ value, count }));
+  }, [indexed]);
+
+  const sizeOptions = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const { p } of indexed) {
+      const s = (p.size || "").trim();
+      if (!s) continue;
+      map.set(s, (map.get(s) ?? 0) + 1);
+    }
+    return Array.from(map.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([value, count]) => ({ value, count }));
+  }, [indexed]);
 
   const hotInScope = useMemo(
-    () => scoped.filter((p) => p.is_hot).length,
-    [scoped],
+    () => indexed.filter(({ p }) => p.is_hot).length,
+    [indexed],
   );
 
+  const colorSet = useMemo(() => new Set(colorsParam), [colorsParam]);
+  const sizeSet = useMemo(() => new Set(sizesParam), [sizesParam]);
+
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    const min = parseMoneyInput(priceMin);
-    const max = parseMoneyInput(priceMax);
-    return scoped.filter((p) => {
-      if (min != null && p.retail_price < min) return false;
-      if (max != null && p.retail_price > max) return false;
-      if (color !== "all") {
-        const pc = (p.color || "").trim();
-        if (pc !== color) return false;
-      }
-      if (hotOnly && !p.is_hot) return false;
-      if (!q) return true;
-      return (
-        p.code.toLowerCase().includes(q) ||
-        (p.internal_code || "").toLowerCase().includes(q) ||
-        p.name.toLowerCase().includes(q) ||
-        p.size.toLowerCase().includes(q) ||
-        (p.color || "").toLowerCase().includes(q) ||
-        (p.collection || "").toLowerCase().includes(q) ||
-        p.material.toLowerCase().includes(q)
-      );
-    });
-  }, [scoped, priceMin, priceMax, color, hotOnly, search]);
+    const q = deferredSearch.trim().toLowerCase();
+    return indexed
+      .filter(({ p, haystack }) => {
+        if (minParam && p.retail_price < minParam) return false;
+        if (maxParam && p.retail_price > maxParam) return false;
+        if (colorSet.size && !colorSet.has((p.color || "").trim()))
+          return false;
+        if (sizeSet.size && !sizeSet.has((p.size || "").trim())) return false;
+        if (hotParam && !p.is_hot) return false;
+        if (!q) return true;
+        return haystack.includes(q);
+      })
+      .map((x) => x.p);
+  }, [indexed, deferredSearch, minParam, maxParam, colorSet, sizeSet, hotParam]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-
-  // Reset filter phụ khi đổi nhóm sidebar
-  useEffect(() => {
-    setPage(1);
-    setSearch("");
-    setPriceMin("");
-    setPriceMax("");
-    setColor("all");
-    setHotOnly(false);
-  }, [nhom]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [priceMin, priceMax, color, hotOnly, search]);
-
-  useEffect(() => {
-    if (page > totalPages) setPage(totalPages);
-  }, [page, totalPages]);
+  const page = Math.min(pageParam, totalPages);
 
   const pageItems = useMemo(() => {
     const start = (page - 1) * PAGE_SIZE;
@@ -162,38 +231,57 @@ function ProductsPage() {
   const withImg = scoped.filter((p) => p.image_path).length;
   const hotTotal = scoped.filter((p) => p.is_hot).length;
 
-  const minN = parseMoneyInput(priceMin);
-  const maxN = parseMoneyInput(priceMax);
-  const hasActiveFilter =
-    Boolean(search.trim()) ||
-    minN != null ||
-    maxN != null ||
-    color !== "all" ||
-    hotOnly;
+  const activeCount =
+    (deferredSearch.trim() ? 1 : 0) +
+    (minParam || maxParam ? 1 : 0) +
+    colorsParam.length +
+    sizesParam.length +
+    (hotParam ? 1 : 0);
+  const hasActiveFilter = activeCount > 0;
 
-  const activeFilterLabels = useMemo(() => {
-    const tags: string[] = [];
-    if (search.trim()) tags.push(`“${search.trim()}”`);
-    if (minN != null || maxN != null) {
-      const a = minN != null ? formatMoneyShort(minN) : "…";
-      const b = maxN != null ? formatMoneyShort(maxN) : "…";
-      tags.push(`Giá ${a}–${b}`);
-    }
-    if (color !== "all") tags.push(color);
-    if (hotOnly) tags.push("Bán chạy");
-    return tags;
-  }, [search, minN, maxN, color, hotOnly]);
+  const priceSummary =
+    minParam || maxParam
+      ? `${minParam ? formatMoneyShort(minParam) : "…"}–${maxParam ? formatMoneyShort(maxParam) : "…"}`
+      : null;
 
-  function clearFilters() {
-    setSearch("");
-    setPriceMin("");
-    setPriceMax("");
-    setColor("all");
-    setHotOnly(false);
+  function setSearch(patch: Partial<SanPhamSearch>) {
+    navigate({
+      search: (prev: SanPhamSearch) => {
+        const next: SanPhamSearch = { ...prev, ...patch, page: undefined };
+        // Dọn field rỗng để URL gọn
+        if (!next.q) delete next.q;
+        if (!next.min) delete next.min;
+        if (!next.max) delete next.max;
+        if (!next.colors || next.colors.length === 0) delete next.colors;
+        if (!next.sizes || next.sizes.length === 0) delete next.sizes;
+        if (!next.hot) delete next.hot;
+        return next;
+      },
+      replace: true,
+    });
   }
 
-  const fieldCls =
-    "h-9 text-sm px-3 rounded-lg bg-transparent border border-border/80 outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/15 text-foreground placeholder:text-muted-foreground/60 transition-shadow";
+  function goPage(next: number) {
+    navigate({
+      search: (prev: SanPhamSearch) => ({
+        ...prev,
+        page: next === 1 ? undefined : next,
+      }),
+      replace: true,
+    });
+  }
+
+  function clearFilters() {
+    setSearchDraft("");
+    setSearch({
+      q: undefined,
+      min: undefined,
+      max: undefined,
+      colors: undefined,
+      sizes: undefined,
+      hot: undefined,
+    });
+  }
 
   return (
     <>
@@ -202,93 +290,148 @@ function ProductsPage() {
         description={`${scoped.length} mã · ${withImg} ảnh · ${hotTotal} bán chạy`}
       />
 
-      {/* Filter trong danh mục (nhóm chọn từ sidebar) */}
-      <div className="mb-8 space-y-4">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+      {/* Toolbar 1 hàng: search + chips */}
+      <div className="mb-6">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
           <div className="relative flex-1 min-w-0">
             <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground/60" />
             <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Tìm mã, tên, kích thước, màu…"
-              className={`${fieldCls} w-full pl-10`}
+              value={searchDraft}
+              onChange={(e) => setSearchDraft(e.target.value)}
+              placeholder="Tìm mã, tên, kích thước, màu, bộ sưu tập…"
+              className="h-10 w-full text-sm pl-10 pr-9 rounded-full bg-transparent border border-border/80 outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/15 text-foreground placeholder:text-muted-foreground/60"
             />
+            {searchDraft && (
+              <button
+                type="button"
+                onClick={() => setSearchDraft("")}
+                aria-label="Xoá tìm kiếm"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/60 hover:text-foreground"
+              >
+                <X className="size-4" />
+              </button>
+            )}
           </div>
-          <button
-            type="button"
-            onClick={() => setHotOnly((v) => !v)}
-            className={
-              hotOnly
-                ? "h-9 shrink-0 px-3.5 rounded-full text-sm font-medium bg-terracotta text-primary-foreground shadow-sm"
-                : "h-9 shrink-0 px-3.5 rounded-full text-sm font-medium border border-border text-muted-foreground hover:text-foreground hover:bg-surface-strong/60 transition-colors"
-            }
-          >
-            Bán chạy
-            <span className={hotOnly ? "opacity-80 ml-1" : "ml-1 opacity-70"}>
-              {hotInScope}
-            </span>
-          </button>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <FilterChip label="Giá" summary={priceSummary}>
+              <PriceFilter
+                min={minParam}
+                max={maxParam}
+                onChange={({ min, max }) =>
+                  setSearch({
+                    min: min || undefined,
+                    max: max || undefined,
+                  })
+                }
+              />
+            </FilterChip>
+
+            <FilterChip label="Màu" count={colorsParam.length}>
+              <MultiSelectFilter
+                title="Chọn màu"
+                options={colorOptions}
+                selected={colorsParam}
+                onChange={(next) =>
+                  setSearch({ colors: next.length ? next : undefined })
+                }
+                searchable
+              />
+            </FilterChip>
+
+            <FilterChip label="Kích thước" count={sizesParam.length}>
+              <MultiSelectFilter
+                title="Chọn kích thước"
+                options={sizeOptions}
+                selected={sizesParam}
+                onChange={(next) =>
+                  setSearch({ sizes: next.length ? next : undefined })
+                }
+              />
+            </FilterChip>
+
+            <button
+              type="button"
+              onClick={() => setSearch({ hot: hotParam ? undefined : true })}
+              className={
+                hotParam
+                  ? "h-9 shrink-0 px-3 rounded-full text-sm font-medium bg-terracotta text-primary-foreground inline-flex items-center gap-1.5 shadow-sm"
+                  : "h-9 shrink-0 px-3 rounded-full text-sm font-medium border border-border text-muted-foreground hover:text-foreground hover:bg-surface-strong/60 transition-colors inline-flex items-center gap-1.5"
+              }
+              aria-pressed={hotParam}
+            >
+              <Flame className="size-3.5" />
+              <span>Bán chạy</span>
+              <span
+                className={
+                  hotParam
+                    ? "opacity-80 tabular-nums"
+                    : "opacity-70 tabular-nums"
+                }
+              >
+                {hotInScope}
+              </span>
+            </button>
+          </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground whitespace-nowrap">
-              Giá lẻ
-            </span>
-            <input
-              type="text"
-              inputMode="numeric"
-              placeholder="Từ"
-              value={priceMin}
-              onChange={(e) => setPriceMin(e.target.value)}
-              className={`${fieldCls} w-[7.25rem]`}
-            />
-            <span className="text-muted-foreground/50 text-sm">→</span>
-            <input
-              type="text"
-              inputMode="numeric"
-              placeholder="Đến"
-              value={priceMax}
-              onChange={(e) => setPriceMax(e.target.value)}
-              className={`${fieldCls} w-[7.25rem]`}
-            />
-          </div>
-
-          <div className="h-5 w-px bg-border hidden sm:block" />
-
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">Màu</span>
-            <select
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-              className={`${fieldCls} min-w-[8.5rem] appearance-none pr-8 bg-[length:12px] bg-[right_0.65rem_center] bg-no-repeat`}
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
-              }}
-            >
-              <option value="all">Tất cả</option>
-              {colorOptions.map(([c, n]) => (
-                <option key={c} value={c}>
-                  {c} · {n}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {hasActiveFilter && (
+        {/* Active filter chips */}
+        {hasActiveFilter && (
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            {deferredSearch.trim() && (
+              <ActiveTag onClear={() => setSearchDraft("")}>
+                “{deferredSearch.trim()}”
+              </ActiveTag>
+            )}
+            {priceSummary && (
+              <ActiveTag
+                onClear={() =>
+                  setSearch({ min: undefined, max: undefined })
+                }
+              >
+                Giá {priceSummary}
+              </ActiveTag>
+            )}
+            {colorsParam.map((c: string) => (
+              <ActiveTag
+                key={`c-${c}`}
+                onClear={() =>
+                  setSearch({
+                    colors: colorsParam.filter((x: string) => x !== c),
+                  })
+                }
+              >
+                {c}
+              </ActiveTag>
+            ))}
+            {sizesParam.map((s: string) => (
+              <ActiveTag
+                key={`s-${s}`}
+                onClear={() =>
+                  setSearch({
+                    sizes: sizesParam.filter((x: string) => x !== s),
+                  })
+                }
+              >
+                {s}
+              </ActiveTag>
+            ))}
+            {hotParam && (
+              <ActiveTag onClear={() => setSearch({ hot: undefined })}>
+                Bán chạy
+              </ActiveTag>
+            )}
             <button
               type="button"
               onClick={clearFilters}
-              className="text-xs text-muted-foreground hover:text-terracotta transition-colors ml-auto"
+              className="text-xs text-muted-foreground hover:text-terracotta transition-colors ml-1"
             >
-              Xóa lọc
-              {activeFilterLabels.length > 0
-                ? ` (${activeFilterLabels.length})`
-                : ""}
+              Xoá tất cả ({activeCount})
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
+
 
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <p className="text-sm text-muted-foreground">
@@ -309,7 +452,7 @@ function ProductsPage() {
           )}
         </p>
         {totalPages > 1 && (
-          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+          <Pagination page={page} totalPages={totalPages} onChange={goPage} />
         )}
       </div>
 
@@ -430,7 +573,7 @@ function ProductsPage() {
 
       {totalPages > 1 && (
         <div className="mt-8 flex justify-center">
-          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+          <Pagination page={page} totalPages={totalPages} onChange={goPage} />
         </div>
       )}
 
@@ -455,6 +598,28 @@ function ProductsPage() {
         product={imagesProduct}
       />
     </>
+  );
+}
+
+function ActiveTag({
+  children,
+  onClear,
+}: {
+  children: React.ReactNode;
+  onClear: () => void;
+}) {
+  return (
+    <span className="inline-flex items-center gap-1 h-7 pl-2.5 pr-1 rounded-full text-xs bg-terracotta-soft text-terracotta ring-1 ring-terracotta/25">
+      {children}
+      <button
+        type="button"
+        onClick={onClear}
+        aria-label="Xoá filter"
+        className="size-4 grid place-items-center rounded-full hover:bg-terracotta/15"
+      >
+        <X className="size-3" />
+      </button>
+    </span>
   );
 }
 

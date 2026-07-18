@@ -39,6 +39,7 @@ export function ProductImage({
         src={src!}
         alt={alt}
         loading="lazy"
+        decoding="async"
         className={cn(
           "w-full h-full",
           fit === "cover" ? "object-cover" : "object-contain object-center",

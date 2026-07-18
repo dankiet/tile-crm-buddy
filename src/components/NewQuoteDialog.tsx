@@ -104,6 +104,7 @@ export function NewQuoteDialog({
               ({
                 id: item.product_id,
                 code: item.product_code,
+                internal_code: "",
                 name: item.product_name,
                 size: item.size,
                 material: "",

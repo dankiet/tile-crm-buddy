@@ -12,7 +12,7 @@ import type {
 } from "@/lib/types";
 
 export const fetchProducts = createServerFn({ method: "GET" })
-  .validator(
+  .inputValidator(
     (data?: { category?: string; search?: string; limit?: number }) => data,
   )
   .handler(async ({ data }) => {
@@ -28,21 +28,21 @@ export const fetchCategories = createServerFn({ method: "GET" }).handler(
 );
 
 export const fetchProduct = createServerFn({ method: "GET" })
-  .validator((data: { id: number }) => data)
+  .inputValidator((data: { id: number }) => data)
   .handler(async ({ data }) => {
     const { getProduct } = await import("@/db/crm.server");
     return getProduct(data.id);
   });
 
 export const fetchSections = createServerFn({ method: "GET" })
-  .validator((data?: { category?: string }) => data)
+  .inputValidator((data?: { category?: string }) => data)
   .handler(async ({ data }) => {
     const { listSections } = await import("@/db/crm.server");
     return listSections(data?.category);
   });
 
 export const updateProductFn = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       id: number;
       code?: string;
@@ -70,14 +70,14 @@ export const updateProductFn = createServerFn({ method: "POST" })
   });
 
 export const fetchProductImages = createServerFn({ method: "GET" })
-  .validator((data: { productId: number }) => data)
+  .inputValidator((data: { productId: number }) => data)
   .handler(async ({ data }) => {
     const { listProductImages } = await import("@/db/crm.server");
     return listProductImages(data.productId);
   });
 
 export const uploadProductImageFn = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       product_id: number;
       filename: string;
@@ -94,7 +94,7 @@ export const uploadProductImageFn = createServerFn({ method: "POST" })
   });
 
 export const addProductImageByPathFn = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       product_id: number;
       path: string;
@@ -109,7 +109,7 @@ export const addProductImageByPathFn = createServerFn({ method: "POST" })
   });
 
 export const updateProductImageFn = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       id: number;
       kind?: ProductImageKind;
@@ -124,35 +124,35 @@ export const updateProductImageFn = createServerFn({ method: "POST" })
   });
 
 export const setPrimaryProductImageFn = createServerFn({ method: "POST" })
-  .validator((data: { productId: number; imageId: number }) => data)
+  .inputValidator((data: { productId: number; imageId: number }) => data)
   .handler(async ({ data }) => {
     const { setPrimaryProductImage } = await import("@/db/crm.server");
     return setPrimaryProductImage(data.productId, data.imageId);
   });
 
 export const deleteProductImageFn = createServerFn({ method: "POST" })
-  .validator((data: { imageId: number }) => data)
+  .inputValidator((data: { imageId: number }) => data)
   .handler(async ({ data }) => {
     const { deleteProductImage } = await import("@/db/crm.server");
     return deleteProductImage(data.imageId);
   });
 
 export const fetchCustomers = createServerFn({ method: "GET" })
-  .validator((data?: { status?: CustomerStatus | "all" }) => data)
+  .inputValidator((data?: { status?: CustomerStatus | "all" }) => data)
   .handler(async ({ data }) => {
     const { listCustomers } = await import("@/db/crm.server");
     return listCustomers(data?.status);
   });
 
 export const fetchCustomer = createServerFn({ method: "GET" })
-  .validator((data: { id: number }) => data)
+  .inputValidator((data: { id: number }) => data)
   .handler(async ({ data }) => {
     const { getCustomer } = await import("@/db/crm.server");
     return getCustomer(data.id);
   });
 
 export const saveCustomer = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       name: string;
       source?: string;
@@ -169,7 +169,7 @@ export const saveCustomer = createServerFn({ method: "POST" })
   });
 
 export const updateCustomerFn = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       id: number;
       name?: string;
@@ -187,7 +187,7 @@ export const updateCustomerFn = createServerFn({ method: "POST" })
   });
 
 export const setCustomerStatus = createServerFn({ method: "POST" })
-  .validator((data: { id: number; status: CustomerStatus }) => data)
+  .inputValidator((data: { id: number; status: CustomerStatus }) => data)
   .handler(async ({ data }) => {
     const { updateCustomerStatus } = await import("@/db/crm.server");
     return updateCustomerStatus(data.id, data.status);
@@ -201,7 +201,7 @@ export const fetchQuotes = createServerFn({ method: "GET" }).handler(
 );
 
 export const fetchQuote = createServerFn({ method: "GET" })
-  .validator((data: { id: number }) => data)
+  .inputValidator((data: { id: number }) => data)
   .handler(async ({ data }) => {
     const { getQuote, getQuoteItems } = await import("@/db/crm.server");
     const quote = getQuote(data.id);
@@ -210,14 +210,14 @@ export const fetchQuote = createServerFn({ method: "GET" })
   });
 
 export const fetchQuoteItems = createServerFn({ method: "GET" })
-  .validator((data: { quoteId: number }) => data)
+  .inputValidator((data: { quoteId: number }) => data)
   .handler(async ({ data }) => {
     const { getQuoteItems } = await import("@/db/crm.server");
     return getQuoteItems(data.quoteId);
   });
 
 export const saveQuote = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       customer_id: number;
       discount_type?: DiscountType;
@@ -236,7 +236,7 @@ export const saveQuote = createServerFn({ method: "POST" })
   });
 
 export const updateQuoteFn = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       id: number;
       customer_id: number;
@@ -257,7 +257,7 @@ export const updateQuoteFn = createServerFn({ method: "POST" })
   });
 
 export const setQuoteStatus = createServerFn({ method: "POST" })
-  .validator((data: { id: number; status: QuoteStatus }) => data)
+  .inputValidator((data: { id: number; status: QuoteStatus }) => data)
   .handler(async ({ data }) => {
     const { updateQuoteStatus } = await import("@/db/crm.server");
     updateQuoteStatus(data.id, data.status);
@@ -272,7 +272,7 @@ export const fetchOrders = createServerFn({ method: "GET" }).handler(
 );
 
 export const saveOrder = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       customer_id: number;
       amount: number;
@@ -287,7 +287,7 @@ export const saveOrder = createServerFn({ method: "POST" })
   });
 
 export const convertQuoteToOrder = createServerFn({ method: "POST" })
-  .validator((data: { quoteId: number }) => data)
+  .inputValidator((data: { quoteId: number }) => data)
   .handler(async ({ data }) => {
     const { createOrderFromQuote } = await import("@/db/crm.server");
     return createOrderFromQuote(data.quoteId);
@@ -301,14 +301,14 @@ export const fetchCustomerDebts = createServerFn({ method: "GET" }).handler(
 );
 
 export const fetchCustomerDebtDetail = createServerFn({ method: "GET" })
-  .validator((data: { customerId: number }) => data)
+  .inputValidator((data: { customerId: number }) => data)
   .handler(async ({ data }) => {
     const { getCustomerDebtDetail } = await import("@/db/crm.server");
     return getCustomerDebtDetail(data.customerId);
   });
 
 export const savePayment = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       customer_id: number;
       amount: number;
@@ -323,14 +323,14 @@ export const savePayment = createServerFn({ method: "POST" })
   });
 
 export const fetchNotes = createServerFn({ method: "GET" })
-  .validator((data?: { limit?: number }) => data)
+  .inputValidator((data?: { limit?: number }) => data)
   .handler(async ({ data }) => {
     const { listNotes } = await import("@/db/crm.server");
     return listNotes(data?.limit ?? 50);
   });
 
 export const saveNote = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     (data: {
       content: string;
       customer_id?: number | null;
@@ -352,7 +352,7 @@ export const fetchDashboard = createServerFn({ method: "GET" }).handler(
 
 /** Xuất báo giá PDF A4 (form Bao_Gia_Form_V2 + ảnh đại diện) */
 export const exportQuoteXlsxFn = createServerFn({ method: "POST" })
-  .validator((data: { quoteId: number }) => data)
+  .inputValidator((data: { quoteId: number }) => data)
   .handler(async ({ data }) => {
     const { exportQuoteToPdf } = await import("@/db/export-quote.server");
     return exportQuoteToPdf(data.quoteId);

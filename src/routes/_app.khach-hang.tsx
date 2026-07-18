@@ -34,7 +34,11 @@ const filters: { key: "all" | CustomerStatus; label: string }[] = [
 ];
 
 function CustomersPage() {
-  const { customers, debts, notes } = Route.useLoaderData();
+  const { customers, debts, notes } = Route.useLoaderData() as {
+    customers: Customer[];
+    debts: Array<{ customer_id: number; debt: number }>;
+    notes: import("@/lib/types").Note[];
+  };
   const [filter, setFilter] = useState<"all" | CustomerStatus>("all");
   const [editCustomer, setEditCustomer] = useState<Customer | null>(null);
 
