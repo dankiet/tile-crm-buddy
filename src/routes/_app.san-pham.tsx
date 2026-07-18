@@ -128,7 +128,7 @@ function ProductsPage() {
     if (searchDraft === (qParam ?? "")) return;
     const t = setTimeout(() => {
       navigate({
-        search: (prev) => ({
+        search: (prev: SanPhamSearch) => ({
           ...prev,
           q: searchDraft.trim() ? searchDraft : undefined,
           page: undefined,
@@ -245,7 +245,7 @@ function ProductsPage() {
 
   function setSearch(patch: Partial<SanPhamSearch>) {
     navigate({
-      search: (prev) => {
+      search: (prev: SanPhamSearch) => {
         const next: SanPhamSearch = { ...prev, ...patch, page: undefined };
         // Dọn field rỗng để URL gọn
         if (!next.q) delete next.q;
@@ -262,7 +262,7 @@ function ProductsPage() {
 
   function goPage(next: number) {
     navigate({
-      search: (prev) => ({
+      search: (prev: SanPhamSearch) => ({
         ...prev,
         page: next === 1 ? undefined : next,
       }),
