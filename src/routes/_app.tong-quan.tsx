@@ -11,7 +11,7 @@ type DashboardData = {
   totalPaid: number;
   totalOrderAmount: number;
   pendingOrders: number;
-  quotePipeline: Record<string, number>;
+  quotePipeline: number;
   notes: Note[];
   customers: Customer[];
 };
