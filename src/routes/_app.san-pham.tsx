@@ -451,7 +451,7 @@ function ProductsPage() {
           )}
         </p>
         {totalPages > 1 && (
-          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+          <Pagination page={page} totalPages={totalPages} onChange={goPage} />
         )}
       </div>
 
@@ -572,7 +572,7 @@ function ProductsPage() {
 
       {totalPages > 1 && (
         <div className="mt-8 flex justify-center">
-          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+          <Pagination page={page} totalPages={totalPages} onChange={goPage} />
         </div>
       )}
 
