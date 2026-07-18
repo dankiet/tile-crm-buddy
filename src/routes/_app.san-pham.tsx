@@ -1,9 +1,12 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { ProductImage } from "@/components/ProductImage";
 import { EditProductDialog } from "@/components/EditProductDialog";
 import { EditProductImagesDialog } from "@/components/EditProductImagesDialog";
+import { FilterChip } from "@/components/product-filter/FilterChip";
+import { PriceFilter } from "@/components/product-filter/PriceFilter";
+import { MultiSelectFilter } from "@/components/product-filter/MultiSelectFilter";
 import { fetchProducts } from "@/api/functions";
 import type { Product } from "@/lib/types";
 import { formatVND } from "@/lib/format";
@@ -15,18 +18,14 @@ import {
 import {
   ChevronLeft,
   ChevronRight,
+  Flame,
   Images,
   Pencil,
   Search,
+  X,
 } from "lucide-react";
 
 const PAGE_SIZE = 24;
-
-function parseMoneyInput(raw: string): number | null {
-  const digits = raw.replace(/[^\d]/g, "");
-  if (!digits) return null;
-  return Number(digits);
-}
 
 function formatMoneyShort(n: number): string {
   if (n >= 1_000_000)
@@ -35,11 +34,42 @@ function formatMoneyShort(n: number): string {
   return String(n);
 }
 
-type SanPhamSearch = { nhom?: string };
+function parseCsv(v: unknown): string[] {
+  if (typeof v !== "string" || !v.trim()) return [];
+  return v
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+type SanPhamSearch = {
+  nhom?: string;
+  q?: string;
+  min?: number;
+  max?: number;
+  colors?: string[];
+  sizes?: string[];
+  hot?: boolean;
+  page?: number;
+};
 
 export const Route = createFileRoute("/_app/san-pham")({
   validateSearch: (search: Record<string, unknown>): SanPhamSearch => ({
     nhom: typeof search.nhom === "string" ? search.nhom : undefined,
+    q: typeof search.q === "string" ? search.q : undefined,
+    min: typeof search.min === "number" ? search.min : undefined,
+    max: typeof search.max === "number" ? search.max : undefined,
+    colors: Array.isArray(search.colors)
+      ? (search.colors as string[])
+      : parseCsv(search.colors),
+    sizes: Array.isArray(search.sizes)
+      ? (search.sizes as string[])
+      : parseCsv(search.sizes),
+    hot: search.hot === true || search.hot === "1",
+    page:
+      typeof search.page === "number" && search.page > 0
+        ? Math.floor(search.page)
+        : undefined,
   }),
   beforeLoad: ({ search }) => {
     if (!search.nhom) {
