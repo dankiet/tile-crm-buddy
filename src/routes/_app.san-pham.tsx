@@ -600,6 +600,28 @@ function ProductsPage() {
   );
 }
 
+function ActiveTag({
+  children,
+  onClear,
+}: {
+  children: React.ReactNode;
+  onClear: () => void;
+}) {
+  return (
+    <span className="inline-flex items-center gap-1 h-7 pl-2.5 pr-1 rounded-full text-xs bg-terracotta-soft text-terracotta ring-1 ring-terracotta/25">
+      {children}
+      <button
+        type="button"
+        onClick={onClear}
+        aria-label="Xoá filter"
+        className="size-4 grid place-items-center rounded-full hover:bg-terracotta/15"
+      >
+        <X className="size-3" />
+      </button>
+    </span>
+  );
+}
+
 function Pagination({
   page,
   totalPages,
