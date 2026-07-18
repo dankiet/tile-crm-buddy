@@ -392,24 +392,24 @@ function ProductsPage() {
                 Giá {priceSummary}
               </ActiveTag>
             )}
-            {colorsParam.map((c) => (
+            {colorsParam.map((c: string) => (
               <ActiveTag
                 key={`c-${c}`}
                 onClear={() =>
                   setSearch({
-                    colors: colorsParam.filter((x) => x !== c),
+                    colors: colorsParam.filter((x: string) => x !== c),
                   })
                 }
               >
                 {c}
               </ActiveTag>
             ))}
-            {sizesParam.map((s) => (
+            {sizesParam.map((s: string) => (
               <ActiveTag
                 key={`s-${s}`}
                 onClear={() =>
                   setSearch({
-                    sizes: sizesParam.filter((x) => x !== s),
+                    sizes: sizesParam.filter((x: string) => x !== s),
                   })
                 }
               >
