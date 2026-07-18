@@ -1,4 +1,5 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
+import * as React from "react";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { ProductImage } from "@/components/ProductImage";
