@@ -32,7 +32,7 @@ export const Route = createFileRoute("/_app/cong-no")({
 type Filter = "all" | "has-debt" | "cleared";
 
 function DebtPage() {
-  const { debts } = Route.useLoaderData();
+  const { debts } = Route.useLoaderData() as { debts: CustomerDebt[] };
   const router = useRouter();
   const [filter, setFilter] = useState<Filter>("all");
   const [detail, setDetail] = useState<CustomerDebtDetail | null>(null);

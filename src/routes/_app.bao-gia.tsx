@@ -32,7 +32,10 @@ export const Route = createFileRoute("/_app/bao-gia")({
 });
 
 function QuotesPage() {
-  const { quotes, orders } = Route.useLoaderData();
+  const { quotes, orders } = Route.useLoaderData() as {
+    quotes: Quote[];
+    orders: Order[];
+  };
   const router = useRouter();
   const [tab, setTab] = useState<"quotes" | "orders">("quotes");
   const [editQuoteId, setEditQuoteId] = useState<number | null>(null);

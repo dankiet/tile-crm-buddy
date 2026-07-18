@@ -56,7 +56,7 @@ function DealCard({
 }
 
 function PipelinePage() {
-  const { customers } = Route.useLoaderData();
+  const { customers } = Route.useLoaderData() as { customers: Customer[] };
   const [editCustomer, setEditCustomer] = useState<Customer | null>(null);
 
   return (

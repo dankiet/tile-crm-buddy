@@ -2,6 +2,7 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { fetchCustomers, fetchNotes, saveNote } from "@/api/functions";
+import type { Customer, Note } from "@/lib/types";
 import { toast } from "sonner";
 import {
   Dialog,
@@ -26,7 +27,10 @@ export const Route = createFileRoute("/_app/ghi-chu")({
 });
 
 function NotesPage() {
-  const { notes, customers } = Route.useLoaderData();
+  const { notes, customers } = Route.useLoaderData() as {
+    notes: Note[];
+    customers: Customer[];
+  };
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState("");

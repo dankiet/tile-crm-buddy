@@ -71,7 +71,7 @@ export const Route = createFileRoute("/_app/san-pham")({
 });
 
 function ProductsPage() {
-  const { products } = Route.useLoaderData();
+  const { products } = Route.useLoaderData() as { products: Product[] };
   const { nhom } = Route.useSearch();
   const category = categoryFromSlug(nhom);
   const groupLabel =

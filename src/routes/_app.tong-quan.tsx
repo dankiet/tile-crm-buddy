@@ -1,9 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
 import { fetchDashboard } from "@/api/functions";
-import { pipelineStages } from "@/lib/types";
+import { pipelineStages, type Customer, type Note } from "@/lib/types";
 import { formatVNDShort } from "@/lib/format";
 import { TrendingUp, Users, Wallet, Package } from "lucide-react";
+
+type DashboardData = {
+  customerCount: number;
+  totalDebt: number;
+  totalPaid: number;
+  totalOrderAmount: number;
+  pendingOrders: number;
+  quotePipeline: Record<string, number>;
+  notes: Note[];
+  customers: Customer[];
+};
 
 export const Route = createFileRoute("/_app/tong-quan")({
   head: () => ({
@@ -14,7 +25,7 @@ export const Route = createFileRoute("/_app/tong-quan")({
 });
 
 function DashboardPage() {
-  const data = Route.useLoaderData();
+  const data = Route.useLoaderData() as DashboardData;
   const {
     customerCount,
     totalDebt,
