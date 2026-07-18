@@ -1,0 +1,200 @@
+{
+  "root": "Y:\\HÌNH GẠCH",
+  "dry_run": false,
+  "started": "2026-07-17 15:02:29",
+  "passes": [
+    {
+      "pass": "A",
+      "files": 9944,
+      "files_with_code_candidates": 8349,
+      "files_matched_db": 2668,
+      "files_no_code_in_name": 1595,
+      "files_code_not_in_db": 5681,
+      "rows_inserted": 786,
+      "rows_dup_skipped": 1882,
+      "products_touched": 478,
+      "samples": [
+        {
+          "code": "MF3022",
+          "ocr_or_file": "mf3022",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/mf3022.jpg",
+          "kind": "map",
+          "web": "/products/MF3022.jpg"
+        },
+        {
+          "code": "20102",
+          "ocr_or_file": "20102",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/20102/20102 (2).jpg",
+          "kind": "map",
+          "web": "/products/20102.jpg"
+        },
+        {
+          "code": "20140",
+          "ocr_or_file": "20140",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/20140/20140 (1).jpg",
+          "kind": "map",
+          "web": "/products/20140.jpg"
+        },
+        {
+          "code": "BH101",
+          "ocr_or_file": "BH101",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BH101/BH101 (2).jpg",
+          "kind": "map",
+          "web": "/products/BH101.jpg"
+        },
+        {
+          "code": "BH102",
+          "ocr_or_file": "BH102",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BH102/BH102 (2).jpg",
+          "kind": "map",
+          "web": "/products/BH102.jpg"
+        },
+        {
+          "code": "BH112",
+          "ocr_or_file": "BH112",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BH102/BH112.jpg",
+          "kind": "map",
+          "web": "/products/BH112.jpg"
+        },
+        {
+          "code": "BH103",
+          "ocr_or_file": "BH103",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BH103/BH103 (2).jpg",
+          "kind": "map",
+          "web": "/products/BH103.jpg"
+        },
+        {
+          "code": "BH105",
+          "ocr_or_file": "BH105",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BH105/BH105 (2).jpg",
+          "kind": "map",
+          "web": "/products/BH105.jpg"
+        },
+        {
+          "code": "BH111",
+          "ocr_or_file": "BH111",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BH111/BH111 (2).jpg",
+          "kind": "map",
+          "web": "/products/BH111.jpg"
+        },
+        {
+          "code": "BH115A BH115B",
+          "ocr_or_file": "BH115A-BH115B",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BH115A BH115B/BH115A-BH115B (2).jpg",
+          "kind": "map",
+          "web": "/products/BH115A_BH115B.jpg"
+        },
+        {
+          "code": "BH113A",
+          "ocr_or_file": "BH113A",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BỘ VIỀN GÓC/BH113A'.jpg",
+          "kind": "map",
+          "web": "/products/BH113A.jpg"
+        },
+        {
+          "code": "BH113B",
+          "ocr_or_file": "BH113B",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BỘ VIỀN GÓC/BH113B.jpg",
+          "kind": "map",
+          "web": "/products/BH113B.jpg"
+        },
+        {
+          "code": "BH114A",
+          "ocr_or_file": "BH114A",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BỘ VIỀN GÓC/BH114A, BH114B.jpg",
+          "kind": "map",
+          "web": "/products/BH114A.jpg"
+        },
+        {
+          "code": "BH114B",
+          "ocr_or_file": "BH114B",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BỘ VIỀN GÓC/BH114B.jpg",
+          "kind": "map",
+          "web": "/products/BH114B.jpg"
+        },
+        {
+          "code": "G02B",
+          "ocr_or_file": "G02B",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BỘ VIỀN GÓC/góc G02B.jpg",
+          "kind": "map",
+          "web": "/products/G02B.jpg"
+        },
+        {
+          "code": "G02A",
+          "ocr_or_file": "G02A",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/BỘ VIỀN GÓC/Viền G02A, gốc G02B (2).jpg",
+          "kind": "map",
+          "web": "/products/G02A.jpg"
+        },
+        {
+          "code": "DC201",
+          "ocr_or_file": "DC2011",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/CHỮ X XANH  - DC201/DC201.1.jpg",
+          "kind": "map",
+          "web": "/products/DC201.jpg"
+        },
+        {
+          "code": "F2089",
+          "ocr_or_file": "F2089",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/CHỮ X ĐEN - F2089/F2089 (1).jpg",
+          "kind": "map",
+          "web": "/products/F2089.jpg"
+        },
+        {
+          "code": "DC202",
+          "ocr_or_file": "DC202",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/DC202/DC202 (2).jpg",
+          "kind": "map",
+          "web": "/products/DC202.jpg"
+        },
+        {
+          "code": "DC204 F2091",
+          "ocr_or_file": "DC204F2091",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/DC204 F2091/DC204 F2091 (1).jpg",
+          "kind": "map",
+          "web": "/products/DC204_F2091.jpg"
+        },
+        {
+          "code": "DC282",
+          "ocr_or_file": "DC282",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/DC282/DC282 (1).jpg",
+          "kind": "map",
+          "web": "/products/DC282.jpg"
+        },
+        {
+          "code": "F2096",
+          "ocr_or_file": "F2096",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/F2096/F2096 (2).jpg",
+          "kind": "map",
+          "web": "/products/F2096.jpg"
+        },
+        {
+          "code": "F2107",
+          "ocr_or_file": "f2107",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/F2107/f2107.jpg",
+          "kind": "map",
+          "web": "/products/F2107.jpg"
+        },
+        {
+          "code": "F2110",
+          "ocr_or_file": "F2110",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/F2110/F2110 (2).jpg",
+          "kind": "map",
+          "web": "/products/F2110.jpg"
+        },
+        {
+          "code": "F2118",
+          "ocr_or_file": "F2118",
+          "rel": "GẠCH BÔNG/GẠCH BÔNG 200X200/F2118/F2118 (1).jpg",
+          "kind": "map",
+          "web": "/products/F2118.jpg"
+        }
+      ]
+    }
+  ],
+  "final": {
+    "product_images": 786,
+    "products_with_image": 478
+  },
+  "finished": "2026-07-17 15:04:42"
+}

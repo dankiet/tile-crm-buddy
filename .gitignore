@@ -16,6 +16,10 @@ dist-ssr
 .nitro
 *.local
 
+# SQLite runtime DB (seed with npm run db:seed)
+data/crm.db
+data/crm.db-*
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
@@ -30,3 +34,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# User-uploaded product images (optional keep local)
+# public/products/uploads/
+
+# Local test exports / stock dumps
+data/exports/
+Stock.xlsx
+

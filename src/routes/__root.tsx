@@ -79,24 +79,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gạch Việt CRM — Quản lý khách hàng ngành gạch ốp lát" },
+      { title: "Innomat CRM — Quản lý khách hàng ngành gạch ốp lát" },
       {
         name: "description",
         content:
           "Phần mềm quản lý khách hàng, cơ hội, báo giá và công nợ chuyên cho showroom gạch ốp lát trang trí.",
       },
-      { property: "og:title", content: "Gạch Việt CRM" },
+      { property: "og:title", content: "Innomat CRM" },
       {
         property: "og:description",
         content:
           "Quản lý khách hàng và dự án ngành gạch ốp lát trang trí trong một nơi.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/logo.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",

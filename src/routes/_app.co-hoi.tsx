@@ -1,66 +1,78 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
-import {
-  customers,
-  pipelineStages,
-  getTile,
-  type Customer,
-} from "@/data/mock";
-import { formatVNDShort } from "@/lib/format";
+import { NewCustomerDialog } from "@/components/NewCustomerDialog";
+import { fetchCustomers } from "@/api/functions";
+import { pipelineStages, type Customer } from "@/lib/types";
 
 export const Route = createFileRoute("/_app/co-hoi")({
   head: () => ({
-    meta: [{ title: "Cơ hội — Gạch Việt CRM" }],
+    meta: [{ title: "Cơ hội — Innomat CRM" }],
   }),
+  loader: async () => {
+    const customers = await fetchCustomers({ data: { status: "all" } });
+    return { customers };
+  },
   component: PipelinePage,
 });
 
-function DealCard({ customer }: { customer: Customer }) {
-  const firstTile = getTile(customer.tiles[0].tileId);
+function DealCard({
+  customer,
+  onEdit,
+}: {
+  customer: Customer;
+  onEdit: () => void;
+}) {
+  const initial = customer.name.trim().charAt(0).toUpperCase() || "?";
   return (
-    <div className="bg-card ring-1 ring-black/5 rounded-lg p-3 hover:ring-stone-300 transition-all cursor-pointer">
+    <button
+      type="button"
+      onClick={onEdit}
+      className="w-full text-left bg-card ring-1 ring-black/5 rounded-lg p-3 hover:ring-stone-300 transition-all"
+    >
       <div className="flex items-start gap-2.5 mb-2">
-        <div
-          className="size-9 rounded bg-cover bg-center outline outline-1 -outline-offset-1 outline-black/5 flex-shrink-0"
-          style={{ backgroundImage: `url(${firstTile.image})` }}
-        />
+        <div className="size-9 rounded bg-surface-strong grid place-items-center text-xs font-medium ring-1 ring-black/5 flex-shrink-0">
+          {initial}
+        </div>
         <div className="min-w-0 flex-1">
           <p className="text-xs font-semibold text-foreground truncate">
             {customer.name}
           </p>
           <p className="text-[10px] text-muted-foreground truncate">
-            {customer.project}
+            {customer.source
+              ? `Nguồn: ${customer.source}`
+              : "Chưa có nguồn"}
           </p>
         </div>
       </div>
       <div className="flex items-center justify-between pt-2 border-t border-border">
         <span className="text-[10px] text-muted-foreground">
-          {customer.region}
+          {customer.region || "—"}
         </span>
-        <span className="text-[11px] font-medium text-foreground">
-          {formatVNDShort(customer.dealValue)}
-        </span>
+        <span className="text-[10px] text-terracotta font-medium">Sửa</span>
       </div>
-    </div>
+    </button>
   );
 }
 
 function PipelinePage() {
+  const { customers } = Route.useLoaderData();
+  const [editCustomer, setEditCustomer] = useState<Customer | null>(null);
+
   return (
     <>
       <PageHeader
         title="Pipeline cơ hội"
-        description="Kéo thả cơ hội qua các giai đoạn để cập nhật tiến độ dự án."
+        description="3 giai đoạn: tư vấn → báo giá → chốt. Bấm lead để sửa."
       />
 
-      <div className="flex gap-4 overflow-x-auto pb-4 -mx-8 px-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {pipelineStages.map((stage) => {
           const deals = customers.filter((c) => c.status === stage.key);
-          const totalValue = deals.reduce((s, c) => s + c.dealValue, 0);
           return (
             <div
               key={stage.key}
-              className="w-72 flex-shrink-0 flex flex-col bg-surface-strong/40 rounded-xl ring-1 ring-black/5"
+              className="flex flex-col min-h-[320px] bg-surface-strong/40 rounded-xl ring-1 ring-black/5"
             >
               <div className="p-4 flex items-center justify-between border-b border-border">
                 <div className="flex items-center gap-2">
@@ -71,9 +83,6 @@ function PipelinePage() {
                     {deals.length}
                   </span>
                 </div>
-                <span className="text-[10px] text-muted-foreground">
-                  {formatVNDShort(totalValue)}
-                </span>
               </div>
               <div className="flex-1 p-3 space-y-2 min-h-[300px]">
                 {deals.length === 0 ? (
@@ -81,13 +90,27 @@ function PipelinePage() {
                     Chưa có cơ hội
                   </p>
                 ) : (
-                  deals.map((c) => <DealCard key={c.id} customer={c} />)
+                  deals.map((c) => (
+                    <DealCard
+                      key={c.id}
+                      customer={c}
+                      onEdit={() => setEditCustomer(c)}
+                    />
+                  ))
                 )}
               </div>
             </div>
           );
         })}
       </div>
+
+      <NewCustomerDialog
+        open={Boolean(editCustomer)}
+        onOpenChange={(o) => {
+          if (!o) setEditCustomer(null);
+        }}
+        customer={editCustomer}
+      />
     </>
   );
 }

@@ -1,0 +1,495 @@
+{
+  "images_scanned": 316,
+  "images_with_codes": 199,
+  "images_no_code": 117,
+  "matched_links": 226,
+  "products_with_new_images": 181,
+  "inserted_rows": 226,
+  "skipped_dup": 0,
+  "unmatched_codes_top": [
+    [
+      "1885MM",
+      24
+    ],
+    [
+      "SIZE150X150MM",
+      7
+    ],
+    [
+      "SIZE100X100MM",
+      7
+    ],
+    [
+      "M17",
+      6
+    ],
+    [
+      "S14",
+      6
+    ],
+    [
+      "SIZE75X300MM",
+      6
+    ],
+    [
+      "CY90388",
+      4
+    ],
+    [
+      "G06",
+      4
+    ],
+    [
+      "G11",
+      4
+    ],
+    [
+      "G18",
+      4
+    ],
+    [
+      "G22",
+      4
+    ],
+    [
+      "LAN1501M",
+      4
+    ],
+    [
+      "S10",
+      4
+    ],
+    [
+      "S02",
+      4
+    ],
+    [
+      "M23",
+      4
+    ],
+    [
+      "M22",
+      4
+    ],
+    [
+      "S09",
+      4
+    ],
+    [
+      "M21",
+      4
+    ],
+    [
+      "M01",
+      4
+    ],
+    [
+      "S12",
+      4
+    ],
+    [
+      "S06",
+      4
+    ],
+    [
+      "M12",
+      4
+    ],
+    [
+      "S03",
+      4
+    ],
+    [
+      "GD62018",
+      3
+    ],
+    [
+      "MD7536G00",
+      3
+    ],
+    [
+      "B108",
+      3
+    ],
+    [
+      "B107",
+      3
+    ],
+    [
+      "B1009",
+      3
+    ],
+    [
+      "B106",
+      3
+    ],
+    [
+      "MB106",
+      3
+    ],
+    [
+      "BH116",
+      2
+    ],
+    [
+      "BH115A-B",
+      2
+    ],
+    [
+      "P215",
+      2
+    ],
+    [
+      "BH119",
+      2
+    ],
+    [
+      "F2115",
+      2
+    ],
+    [
+      "BH108",
+      2
+    ],
+    [
+      "F2155",
+      2
+    ],
+    [
+      "ND202",
+      2
+    ],
+    [
+      "S923M",
+      2
+    ],
+    [
+      "9717M",
+      2
+    ]
+  ],
+  "sample_matches": [
+    {
+      "product_id": 412,
+      "product_code": "BH111",
+      "product_name": "Bông 4 cánh xanh dương họa tiết nhỏ",
+      "ocr_code": "BH111",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166257565_2876329766788409182_g1561276178029434142_6ce38cd250bfa9b420179cbef1a60ff4.jpg",
+      "rel": "Gach Bong/1784166257565_2876329766788409182_g1561276178029434142_6ce38cd250bfa9b420179cbef1a60ff4.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 427,
+      "product_code": "F2114",
+      "product_name": "Đồng tiền trắng nền đen",
+      "ocr_code": "F2114",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166257565_2876329766788409182_g1561276178029434142_6ce38cd250bfa9b420179cbef1a60ff4.jpg",
+      "rel": "Gach Bong/1784166257565_2876329766788409182_g1561276178029434142_6ce38cd250bfa9b420179cbef1a60ff4.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 419,
+      "product_code": "F2118",
+      "product_name": "Bông mai rùa/ bát giác",
+      "ocr_code": "F2118",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166257565_2876329766788409182_g1561276178029434142_6ce38cd250bfa9b420179cbef1a60ff4.jpg",
+      "rel": "Gach Bong/1784166257565_2876329766788409182_g1561276178029434142_6ce38cd250bfa9b420179cbef1a60ff4.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 403,
+      "product_code": "20140",
+      "product_name": "Bông 8 cánh xanh đen",
+      "ocr_code": "20140",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166257565_2876329766788409182_g1561276178029434142_6ce38cd250bfa9b420179cbef1a60ff4.jpg",
+      "rel": "Gach Bong/1784166257565_2876329766788409182_g1561276178029434142_6ce38cd250bfa9b420179cbef1a60ff4.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 432,
+      "product_code": "BH105",
+      "product_name": "Bông lá xanh nhỏ chấm vàng",
+      "ocr_code": "BH105",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166257736_2876329766788409182_g1561276178029434142_be056757629e7e60c2862abe6e890cca.jpg",
+      "rel": "Gach Bong/1784166257736_2876329766788409182_g1561276178029434142_be056757629e7e60c2862abe6e890cca.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 455,
+      "product_code": "20109",
+      "product_name": "Mix màu",
+      "ocr_code": "20109",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166257736_2876329766788409182_g1561276178029434142_be056757629e7e60c2862abe6e890cca.jpg",
+      "rel": "Gach Bong/1784166257736_2876329766788409182_g1561276178029434142_be056757629e7e60c2862abe6e890cca.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 413,
+      "product_code": "F2096",
+      "product_name": "Sừng trâu xanh",
+      "ocr_code": "F2096",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166257960_2876329766788409182_g1561276178029434142_b5030dc6f76a459c6124472f86581175.jpg",
+      "rel": "Gach Bong/1784166257960_2876329766788409182_g1561276178029434142_b5030dc6f76a459c6124472f86581175.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 454,
+      "product_code": "F2112",
+      "product_name": "Mix lá xanh",
+      "ocr_code": "F2112",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166257960_2876329766788409182_g1561276178029434142_b5030dc6f76a459c6124472f86581175.jpg",
+      "rel": "Gach Bong/1784166257960_2876329766788409182_g1561276178029434142_b5030dc6f76a459c6124472f86581175.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 455,
+      "product_code": "20109",
+      "product_name": "Mix màu",
+      "ocr_code": "20109",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258186_2876329766788409182_g1561276178029434142_20affad23e253799d26e8774d3a32594.jpg",
+      "rel": "Gach Bong/1784166258186_2876329766788409182_g1561276178029434142_20affad23e253799d26e8774d3a32594.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 404,
+      "product_code": "F2110",
+      "product_name": "Hoa đỏ 8 cánh cam, viền xanh lá",
+      "ocr_code": "F2110",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258186_2876329766788409182_g1561276178029434142_20affad23e253799d26e8774d3a32594.jpg",
+      "rel": "Gach Bong/1784166258186_2876329766788409182_g1561276178029434142_20affad23e253799d26e8774d3a32594.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 423,
+      "product_code": "F2089",
+      "product_name": "Bông chữ x đen",
+      "ocr_code": "F2089",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258186_2876329766788409182_g1561276178029434142_20affad23e253799d26e8774d3a32594.jpg",
+      "rel": "Gach Bong/1784166258186_2876329766788409182_g1561276178029434142_20affad23e253799d26e8774d3a32594.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 435,
+      "product_code": "20102",
+      "product_name": "Cổ điển xanh",
+      "ocr_code": "20102",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258459_2876329766788409182_g1561276178029434142_e0b1d51965d0b0be69c3d285c50ce96b.jpg",
+      "rel": "Gach Bong/1784166258459_2876329766788409182_g1561276178029434142_e0b1d51965d0b0be69c3d285c50ce96b.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 409,
+      "product_code": "ND210",
+      "product_name": "Bông mai đường chéo",
+      "ocr_code": "ND210",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258459_2876329766788409182_g1561276178029434142_e0b1d51965d0b0be69c3d285c50ce96b.jpg",
+      "rel": "Gach Bong/1784166258459_2876329766788409182_g1561276178029434142_e0b1d51965d0b0be69c3d285c50ce96b.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 410,
+      "product_code": "F2122",
+      "product_name": "Bông mai xanh trắng nền xanh mint",
+      "ocr_code": "F2122",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258629_2876329766788409182_g1561276178029434142_9719c2c3bdc05b6dd65f853f080531a6.jpg",
+      "rel": "Gach Bong/1784166258629_2876329766788409182_g1561276178029434142_9719c2c3bdc05b6dd65f853f080531a6.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 438,
+      "product_code": "DC260",
+      "product_name": "Ruy băng nhỏ xám đen + chữ nhật xám",
+      "ocr_code": "DC260",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258629_2876329766788409182_g1561276178029434142_9719c2c3bdc05b6dd65f853f080531a6.jpg",
+      "rel": "Gach Bong/1784166258629_2876329766788409182_g1561276178029434142_9719c2c3bdc05b6dd65f853f080531a6.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 407,
+      "product_code": "BH112",
+      "product_name": "Bông mai đen",
+      "ocr_code": "BH112",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258835_2876329766788409182_g1561276178029434142_56f7716661621af487d3aea57f1c19ee.jpg",
+      "rel": "Gach Bong/1784166258835_2876329766788409182_g1561276178029434142_56f7716661621af487d3aea57f1c19ee.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 424,
+      "product_code": "BH101",
+      "product_name": "Bông mũi tên xám + đen",
+      "ocr_code": "BH101",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258835_2876329766788409182_g1561276178029434142_56f7716661621af487d3aea57f1c19ee.jpg",
+      "rel": "Gach Bong/1784166258835_2876329766788409182_g1561276178029434142_56f7716661621af487d3aea57f1c19ee.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 425,
+      "product_code": "DC282",
+      "product_name": "Hoa 4 cánh- nét vẽ",
+      "ocr_code": "DC282",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166258835_2876329766788409182_g1561276178029434142_56f7716661621af487d3aea57f1c19ee.jpg",
+      "rel": "Gach Bong/1784166258835_2876329766788409182_g1561276178029434142_56f7716661621af487d3aea57f1c19ee.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 405,
+      "product_code": "BH103",
+      "product_name": "Lồng đèn trắng",
+      "ocr_code": "BH103",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166259177_2876329766788409182_g1561276178029434142_53da8dfae203e20e7ac35ae9a0bf2091.jpg",
+      "rel": "Gach Bong/1784166259177_2876329766788409182_g1561276178029434142_53da8dfae203e20e7ac35ae9a0bf2091.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 433,
+      "product_code": "DC201",
+      "product_name": "Chữ x 2 nét xanh dương",
+      "ocr_code": "DC201",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166259177_2876329766788409182_g1561276178029434142_53da8dfae203e20e7ac35ae9a0bf2091.jpg",
+      "rel": "Gach Bong/1784166259177_2876329766788409182_g1561276178029434142_53da8dfae203e20e7ac35ae9a0bf2091.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 416,
+      "product_code": "DC202",
+      "product_name": "Hoa mộc lan 8 cánh, viền 1/4 tròn",
+      "ocr_code": "DC202",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166259324_2876329766788409182_g1561276178029434142_9f7f9527509b72767c20fc08ef78b78b.jpg",
+      "rel": "Gach Bong/1784166259324_2876329766788409182_g1561276178029434142_9f7f9527509b72767c20fc08ef78b78b.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 439,
+      "product_code": "BH106",
+      "product_name": "Ruy băng xám xanh đen",
+      "ocr_code": "BH106",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166259324_2876329766788409182_g1561276178029434142_9f7f9527509b72767c20fc08ef78b78b.jpg",
+      "rel": "Gach Bong/1784166259324_2876329766788409182_g1561276178029434142_9f7f9527509b72767c20fc08ef78b78b.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 445,
+      "product_code": "F2161",
+      "product_name": "Hoa nhỏ xanh lá",
+      "ocr_code": "F2161",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Bong\\1784166259525_2876329766788409182_g1561276178029434142_308d0935fb02b81ca9476309056647e5.jpg",
+      "rel": "Gach Bong/1784166259525_2876329766788409182_g1561276178029434142_308d0935fb02b81ca9476309056647e5.jpg",
+      "category_folder": "Gạch bông",
+      "collection_hint": "Gach Bong"
+    },
+    {
+      "product_id": 258,
+      "product_code": "Y97822",
+      "product_name": "Mosaic vuông/ xám nhạt mờ",
+      "ocr_code": "Y97822",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Mosaic\\Opt1\\1784167842891_2876329766788409182_g1561276178029434142_1e87d32467f497952ee28c327a481226.jpg",
+      "rel": "Gach Mosaic/Opt1/1784167842891_2876329766788409182_g1561276178029434142_1e87d32467f497952ee28c327a481226.jpg",
+      "category_folder": "Gạch mosaic",
+      "collection_hint": "Opt1"
+    },
+    {
+      "product_id": 257,
+      "product_code": "Y97823",
+      "product_name": "Mosaic vuông/ xám đậm mờ",
+      "ocr_code": "Y97823",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Mosaic\\Opt1\\1784167843117_2876329766788409182_g1561276178029434142_337828ad1d5a7752cbc863165790ad6b.jpg",
+      "rel": "Gach Mosaic/Opt1/1784167843117_2876329766788409182_g1561276178029434142_337828ad1d5a7752cbc863165790ad6b.jpg",
+      "category_folder": "Gạch mosaic",
+      "collection_hint": "Opt1"
+    },
+    {
+      "product_id": 256,
+      "product_code": "Y97811",
+      "product_name": "Mosaic vuông/ xanh lá đậm mờ",
+      "ocr_code": "Y97811",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Mosaic\\Opt1\\1784167843285_2876329766788409182_g1561276178029434142_d4295cb47e4447eb86a811a283e7fa29.jpg",
+      "rel": "Gach Mosaic/Opt1/1784167843285_2876329766788409182_g1561276178029434142_d4295cb47e4447eb86a811a283e7fa29.jpg",
+      "category_folder": "Gạch mosaic",
+      "collection_hint": "Opt1"
+    },
+    {
+      "product_id": 255,
+      "product_code": "Y97803",
+      "product_name": "Mosaic vuông/ xanh biển nhạt mờ",
+      "ocr_code": "Y97803",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Mosaic\\Opt1\\1784167843523_2876329766788409182_g1561276178029434142_49e8fe7eabb4a03aa69e90d3fb159cbc.jpg",
+      "rel": "Gach Mosaic/Opt1/1784167843523_2876329766788409182_g1561276178029434142_49e8fe7eabb4a03aa69e90d3fb159cbc.jpg",
+      "category_folder": "Gạch mosaic",
+      "collection_hint": "Opt1"
+    },
+    {
+      "product_id": 254,
+      "product_code": "Y97805",
+      "product_name": "Mosaic vuông/ xanh mint mờ",
+      "ocr_code": "Y97805",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Mosaic\\Opt1\\1784167843687_2876329766788409182_g1561276178029434142_9eeb518aeffc7b1c8caddf06d79cac26.jpg",
+      "rel": "Gach Mosaic/Opt1/1784167843687_2876329766788409182_g1561276178029434142_9eeb518aeffc7b1c8caddf06d79cac26.jpg",
+      "category_folder": "Gạch mosaic",
+      "collection_hint": "Opt1"
+    },
+    {
+      "product_id": 253,
+      "product_code": "Y97802",
+      "product_name": "Mosaic vuông/ hồng mờ",
+      "ocr_code": "Y97802",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Mosaic\\Opt1\\1784167843880_2876329766788409182_g1561276178029434142_90ec64f8e0e58247bbc800a7e0047b17.jpg",
+      "rel": "Gach Mosaic/Opt1/1784167843880_2876329766788409182_g1561276178029434142_90ec64f8e0e58247bbc800a7e0047b17.jpg",
+      "category_folder": "Gạch mosaic",
+      "collection_hint": "Opt1"
+    },
+    {
+      "product_id": 262,
+      "product_code": "Y97701",
+      "product_name": "Mosaic vuông/ trắng bóng",
+      "ocr_code": "Y97701",
+      "src": "C:\\Users\\dankiet\\Documents\\Image_Gach_Code\\Gach Mosaic\\Opt1\\1784167844103_2876329766788409182_g1561276178029434142_3037bc0972cb9499659b15c2ea18b669.jpg",
+      "rel": "Gach Mosaic/Opt1/1784167844103_2876329766788409182_g1561276178029434142_3037bc0972cb9499659b15c2ea18b669.jpg",
+      "category_folder": "Gạch mosaic",
+      "collection_hint": "Opt1"
+    }
+  ],
+  "sample_no_code": [
+    "Gach Mosaic/Opt1/1784167842539_2876329766788409182_g1561276178029434142_786cebc5f26cfaf34d8a31efdb3f5eb3.jpg",
+    "Gach Mosaic/Opt1/1784167845757_2876329766788409182_g1561276178029434142_f9f4208777665ec8a056db7cabeee0c2.jpg",
+    "Gach Mosaic/Opt10/1784167925772_2876329766788409182_g1561276178029434142_203bfae188a5adc3453bd2cd03c46f22.jpg",
+    "Gach Mosaic/Opt10/1784167925914_2876329766788409182_g1561276178029434142_59752a486163097461a05167143600aa.jpg",
+    "Gach Mosaic/Opt10/1784167926148_2876329766788409182_g1561276178029434142_aa3490e5e25df75429105e693f922253.jpg",
+    "Gach Mosaic/Opt10/1784167926365_2876329766788409182_g1561276178029434142_0e99ebbad9c59ded3f3f78121a52053e.jpg",
+    "Gach Mosaic/Opt10/1784167926556_2876329766788409182_g1561276178029434142_87a58aeb8b2f15c6bc9d4b992be8aeb8.jpg",
+    "Gach Mosaic/Opt10/1784167926795_2876329766788409182_g1561276178029434142_68617d69ebf47b6e9a78584b5e665103.jpg",
+    "Gach Mosaic/Opt10/1784167927040_2876329766788409182_g1561276178029434142_e2f49c0f7f518b13b3dc0d007cdd9ac0.jpg",
+    "Gach Mosaic/Opt3 - KitKat/1784167969451_2876329766788409182_g1561276178029434142_97cb14bb3f6084280ba739d62a055f54.jpg",
+    "Gach Mosaic/Opt3 - KitKat/1784167969635_2876329766788409182_g1561276178029434142_e950fb1981c9cfa494046be715cd24a5.jpg",
+    "Gach Mosaic/Opt3 - KitKat/1784167969872_2876329766788409182_g1561276178029434142_ac3e130b1685ba818c2f7257a4ddcbda.jpg",
+    "Gach Mosaic/Opt3 - KitKat/1784167970069_2876329766788409182_g1561276178029434142_c7da70c357144e061e0ad05bfa86d910.jpg",
+    "Gach Mosaic/Opt3 - KitKat/1784167970232_2876329766788409182_g1561276178029434142_0239186b12bd39adddbc79f3166ee134.jpg",
+    "Gach Mosaic/Opt3 - KitKat/1784167970491_2876329766788409182_g1561276178029434142_1b3aba0b47b1e390edcbdf9939d965ea.jpg",
+    "Gach Mosaic/Opt3 - KitKat/1784167970691_2876329766788409182_g1561276178029434142_6ce868c5ff2df0a23897c78fe8f6ea0e.jpg",
+    "Gach Mosaic/Opt4 - Aurora/1784168102090_2876329766788409182_g1561276178029434142_50404b1282334a131b2e313d77a74f95.jpg",
+    "Gach Mosaic/Opt4 - Aurora/1784168102251_2876329766788409182_g1561276178029434142_1b0602e51c447c4f91dd5a9223fdbcf6.jpg",
+    "Gach Mosaic/Opt4 - Aurora/1784168102574_2876329766788409182_g1561276178029434142_04f48205c03050521aaad7bfb74d3218.jpg",
+    "Gach Mosaic/Opt4 - Aurora/1784168102746_2876329766788409182_g1561276178029434142_fdd8996d84850bb320d47b807e3f494d.jpg"
+  ]
+}

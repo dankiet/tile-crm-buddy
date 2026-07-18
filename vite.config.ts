@@ -12,4 +12,13 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    // better-sqlite3 is a native Node addon — keep it external for SSR
+    ssr: {
+      external: ["better-sqlite3"],
+    },
+    optimizeDeps: {
+      exclude: ["better-sqlite3"],
+    },
+  },
 });

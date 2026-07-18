@@ -4,11 +4,14 @@ import {
   Users,
   Target,
   FileText,
-  Package,
   Wallet,
   StickyNote,
-  Layers,
+  Grid2x2,
+  Hexagon,
+  Square,
+  RectangleHorizontal,
 } from "lucide-react";
+import { PRODUCT_GROUPS } from "@/lib/product-categories";
 
 const mainNav = [
   { to: "/tong-quan", label: "Tổng quan", icon: LayoutDashboard },
@@ -19,22 +22,34 @@ const mainNav = [
   { to: "/ghi-chu", label: "Ghi chú", icon: StickyNote },
 ] as const;
 
-const productNav = [
-  { to: "/san-pham", label: "Gạch ốp lát", icon: Layers },
-] as const;
+const productIcons = {
+  "gach-the": RectangleHorizontal,
+  "gach-mosaic": Grid2x2,
+  "gach-bong": Hexagon,
+  "gach-300x600": Square,
+} as const;
 
 export function AppSidebar() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { pathname, search } = useRouterState({
+    select: (s) => ({
+      pathname: s.location.pathname,
+      search: s.location.search as { nhom?: string },
+    }),
+  });
 
   return (
     <aside className="w-60 flex-shrink-0 flex flex-col border-r border-border bg-surface">
-      <div className="p-5 flex items-center gap-2">
-        <div className="size-7 rounded-md bg-terracotta grid place-items-center text-primary-foreground">
-          <Package className="size-4" />
-        </div>
+      <div className="p-5 flex items-center gap-3">
+        <img
+          src="/logo.png"
+          alt="Innomat"
+          width={36}
+          height={36}
+          className="size-9 rounded-lg object-contain bg-white ring-1 ring-black/5 flex-shrink-0 p-0.5"
+        />
         <div className="min-w-0">
           <p className="font-medium tracking-tight text-foreground text-sm">
-            Gạch Việt CRM
+            Innomat CRM
           </p>
           <p className="text-[10px] text-muted-foreground">Showroom Manager</p>
         </div>
@@ -72,13 +87,15 @@ export function AppSidebar() {
         <div className="pt-4 pb-2 px-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">
           Sản phẩm
         </div>
-        {productNav.map((item) => {
-          const active = pathname === item.to;
-          const Icon = item.icon;
+        {PRODUCT_GROUPS.map((g) => {
+          const active =
+            pathname === "/san-pham" && search?.nhom === g.slug;
+          const Icon = productIcons[g.slug];
           return (
             <Link
-              key={item.to}
-              to={item.to}
+              key={g.slug}
+              to="/san-pham"
+              search={{ nhom: g.slug }}
               className={
                 active
                   ? "flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-foreground bg-surface-strong rounded-md shadow-sm ring-1 ring-black/5"
@@ -92,7 +109,7 @@ export function AppSidebar() {
                     : "size-4 flex-shrink-0 text-muted-foreground/70"
                 }
               />
-              {item.label}
+              {g.label}
             </Link>
           );
         })}
@@ -101,14 +118,14 @@ export function AppSidebar() {
       <div className="p-4 border-t border-border">
         <div className="flex items-center gap-2 px-1">
           <div className="size-8 bg-surface-strong ring-1 ring-black/5 rounded-full grid place-items-center flex-shrink-0 text-xs font-medium text-foreground">
-            MH
+            TK
           </div>
           <div className="min-w-0">
             <p className="text-xs font-medium text-foreground truncate">
-              Minh Hoàng
+              Thế Kiệt
             </p>
             <p className="text-[10px] text-muted-foreground truncate">
-              Quản lý Showroom
+              Sales Executive
             </p>
           </div>
         </div>
